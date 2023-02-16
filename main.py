@@ -5,15 +5,13 @@ import csv, json
 from telethon.tl.functions.messages import GetDialogsRequest
 from telethon.tl.types import InputPeerEmpty
 import logging
+from settings import API_ID,API_HASH,PHONE
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-api_id = 29959259
-api_hash = "9c4c956bba55cf0414a5fbe8ee2b64f5"
-phone = "+79174624614"
 myUsername = 'brclaud'
-client = TelegramClient(myUsername, api_id, api_hash)
+client = TelegramClient(myUsername, API_ID, API_HASH)
 
 
 async def scrap():

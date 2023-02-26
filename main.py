@@ -10,12 +10,11 @@ from settings import API_ID,API_HASH,PHONE
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
 
-myUsername = 'brclaud'
-client = TelegramClient(myUsername, API_ID, API_HASH)
+client = TelegramClient(PHONE, API_ID, API_HASH)
 
 
 async def scrap():
-    dialogs = await client.get_dialogs()
+    dialogs = await client.get_dialogs() # получение диалогов
     groups = []
     i = 0
     for dialog in dialogs:
@@ -62,7 +61,7 @@ def check():
                 un+=' '
 
         if status !='/':
-            if un != "":
+            if un != "" and status == '+':
                 all_participants.append([un,email,False])
         else:
             break
@@ -103,6 +102,7 @@ def check():
 
 
 if __name__=="__main__":
+
+    with client:
+        client.loop.run_until_complete(scrap())
     check()
-    # with client:
-    #     client.loop.run_until_complete(scrap())
